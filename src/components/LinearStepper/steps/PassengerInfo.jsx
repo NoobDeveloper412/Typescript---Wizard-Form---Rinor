@@ -1,77 +1,152 @@
-import { Grid, TextField, Typography } from "@material-ui/core";
-import { Controller, useFormContext } from "react-hook-form";
+import {  TextField, Typography } from "@material-ui/core";
+import { useFormContext } from "react-hook-form";
 import React from "react";
 
 const PassengerInfo = () => {
-  const { control } = useFormContext();
+  const { control, register } = useFormContext();
   const { number_of_adults, number_of_children, number_of_infants } =
     control._formValues;
 
   return (
-    <>
-      <React.Fragment>
-        <Typography variant="h6" gutterBottom>
-          Passenger Info
-        </Typography>
-        <Grid container spacing={3}>
-          {Array.from({ length: number_of_adults }).map((_, index) => (
-            <Grid item xs={4}>
-              <Controller
-                key={index + "a"}
-                control={control}
-                name="adult"
-                render={({ field }) => (
-                  <TextField
-                    label="Adult Name"
-                    variant="outlined"
-                    fullWidth={true}
-                    {...field}
-                  />
-                )}
-              />
-            </Grid>
-          ))}
-        </Grid>
-        <Grid container spacing={3}>
-          {Array.from({ length: number_of_children }).map((_, index) => (
-            <Grid item xs={4}>
-              <Controller
-                key={index + number_of_adults}
-                control={control}
-                name="child"
-                render={({ field }) => (
-                  <TextField
-                    label="Child Name"
-                    variant="outlined"
-                    fullWidth={true}
-                    {...field}
-                  />
-                )}
-              />
-            </Grid>
-          ))}
-        </Grid>
-        <Grid container spacing={3}>
-          {Array.from({ length: number_of_infants }).map((_, index) => (
-            <Grid item xs={4}>
-              <Controller
-                key={index}
-                control={control}
-                name="Infant"
-                render={({ field }) => (
-                  <TextField
-                    label="Infant Name"
-                    variant="outlined"
-                    fullWidth={true}
-                    {...field}
-                  />
-                )}
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </React.Fragment>
-    </>
+    <React.Fragment>
+      <Typography variant="h6" gutterBottom>
+        Passenger Information
+      </Typography>
+      {Array.from({ length: number_of_adults }).map((_, index) => (
+        <div style={{ margin: 20 }}>
+          <TextField
+            {...register(`adults.${index}.surName`)}
+            label="Surname"
+            variant="outlined"
+            fullWidth={true}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            {...register(`adults.${index}.firstName`)}
+            label="First Name"
+            variant="outlined"
+            fullWidth={true}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            {...register(`adults.${index}.email`)}
+            label="Email"
+            variant="outlined"
+            fullWidth={true}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            {...register(`adults.${index}.phoneNumber`)}
+            label="Phone Number"
+            variant="outlined"
+            fullWidth={true}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            {...register(`adults.${index}.date_of_birth_of_adult`)}
+            label="Date of Birth"
+            variant="outlined"
+            fullWidth={true}
+            type="date"
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </div>
+      ))}
+      <hr />
+      {Array.from({ length: number_of_children }).map((_, index) => (
+        <div style={{ margin: 20 }}>
+          <TextField
+            {...register(`children.${index}.surName`)}
+            label="Surname"
+            variant="outlined"
+            fullWidth={true}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            {...register(`children.${index}.firstName`)}
+            label="First Name"
+            variant="outlined"
+            fullWidth={true}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            {...register(`children.${index}.email`)}
+            label="Email"
+            variant="outlined"
+            fullWidth={true}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            {...register(`children.${index}.phoneNumber`)}
+            label="Phone Number"
+            variant="outlined"
+            fullWidth={true}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            {...register(`children.${index}.date_of_birth_of_children`)}
+            label="Date of Birth"
+            variant="outlined"
+            fullWidth={true}
+            type="date"
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </div>
+      ))}
+      <hr />
+      {Array.from({ length: number_of_infants }).map((_, index) => (
+        <div style={{ margin: 20 }}>
+          <TextField
+            {...register(`infants.${index}.surName`)}
+            label="Surname"
+            variant="outlined"
+            fullWidth={true}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            {...register(`infants.${index}.firstName`)}
+            label="First Name"
+            variant="outlined"
+            fullWidth={true}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            {...register(`infants.${index}.date_of_birth_of_infant`)}
+            label="Date of Birth"
+            variant="outlined"
+            fullWidth={true}
+            type="date"
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </div>
+      ))}
+    </React.Fragment>
   );
 };
 

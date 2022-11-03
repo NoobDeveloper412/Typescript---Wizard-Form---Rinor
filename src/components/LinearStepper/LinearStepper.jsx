@@ -54,35 +54,9 @@ const LinaerStepper = () => {
       number_of_adults: 0,
       number_of_children: 0,
       number_of_infants: 0,
-      adults: [
-        {
-          id: 0,
-          firstName: "",
-          surName: "",
-          email: "",
-          phoneNumber: "",
-          date_of_birth_adults: "",
-        },
-      ],
-      children: [
-        {
-          id: 0,
-          firstName: "",
-          surName: "",
-          email: "",
-          phoneNumber: "",
-          date_of_birth_children: "",
-        },
-      ],
-      infants: [
-        {
-          id: 0,
-          firstName: "",
-          surName: "",
-          date_of_birth_infants: "",
-          age: "",
-        },
-      ],
+      adults: [],
+      children: [],
+      infants: [],
       airline: "",
       cabin: "",
       basicFare: "",
