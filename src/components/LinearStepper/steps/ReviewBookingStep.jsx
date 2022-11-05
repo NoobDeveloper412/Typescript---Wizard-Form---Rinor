@@ -1,4 +1,4 @@
-import { Box, Grid, TextField, Typography } from "@material-ui/core";
+import { Grid, TextField, Typography } from "@material-ui/core";
 import { Controller, useFormContext } from "react-hook-form";
 import React from "react";
 
@@ -13,9 +13,6 @@ const ReviewBooking = () => {
     number_of_adults,
     number_of_children,
     number_of_infants,
-    adults,
-    children,
-    infants,
     airline,
     cabin,
     basicFare,

@@ -1,6 +1,7 @@
 import { Grid, TextField, Typography } from "@material-ui/core";
 import { Controller, useFormContext } from "react-hook-form";
 import React from "react";
+import InputField from "../../UI_FormComponents/InputField";
 
 const BookingInfo = () => {
   const { control } = useFormContext();
@@ -17,12 +18,13 @@ const BookingInfo = () => {
               control={control}
               name="origin"
               render={({ field }) => (
-                <TextField
-                  label="From"
-                  variant="outlined"
-                  fullWidth={true}
-                  {...field}
-                />
+                // <TextField
+                //   label="From"
+                //   variant="outlined"
+                //   fullWidth={true}
+                //   {...field}
+                // />
+                <InputField name='from' label='From' />
               )}
             />
           </Grid>

@@ -43,7 +43,7 @@ function getStepContent(step) {
   }
 }
 
-const LinaerStepper = () => {
+const LinearStepper = () => {
   const classes = useStyles();
   const methods = useForm({
     defaultValues: {
@@ -51,9 +51,9 @@ const LinaerStepper = () => {
       destination: "",
       journeyDate: "",
       returnDate: "",
-      number_of_adults: 0,
-      number_of_children: 0,
-      number_of_infants: 0,
+      number_of_adults: 1,
+      number_of_children: 1,
+      number_of_infants: 1,
       adults: [],
       children: [],
       infants: [],
@@ -193,4 +193,4 @@ const LinaerStepper = () => {
   );
 };
 
-export default LinaerStepper;
+export default LinearStepper;
