@@ -1,10 +1,26 @@
-import { Grid, TextField, Typography } from "@material-ui/core";
+import { FormLabel, Grid, TextField, Typography } from "@material-ui/core";
 import { Controller, useFormContext } from "react-hook-form";
 import React from "react";
 import InputField from "../../UI_FormComponents/InputField";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import { useState } from "react";
 
 const BookingInfo = () => {
   const { control } = useFormContext();
+  const [oneWayTrip, setOneWayTrip] = useState(true);
+
+  function handleFlightType(value) {
+    if (value === "oneWay") {
+      setOneWayTrip(true);
+    }
+    if (value === "roundWay") {
+      setOneWayTrip(false);
+    }
+  }
+
   return (
     <>
       <React.Fragment>
@@ -12,6 +28,26 @@ const BookingInfo = () => {
           Booking Details
         </Typography>
 
+        <FormControl>
+          <RadioGroup
+            row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            name="row-radio-buttons-group"
+            onChange={(e) => handleFlightType(e.target.value)}
+            defaultValue="oneWay"
+          >
+            <FormControlLabel
+              value="oneWay"
+              control={<Radio />}
+              label="One Way Trip"
+            />
+            <FormControlLabel
+              value="roundWay"
+              control={<Radio />}
+              label="Round Way Trip"
+            />
+          </RadioGroup>
+        </FormControl>
         <Grid container spacing={3}>
           <Grid item xs={3}>
             <Controller
@@ -24,7 +60,7 @@ const BookingInfo = () => {
                 //   fullWidth={true}
                 //   {...field}
                 // />
-                <InputField name='from' label='From' />
+                <InputField name="from" label="From" />
               )}
             />
           </Grid>
@@ -60,6 +96,7 @@ const BookingInfo = () => {
               )}
             />
           </Grid>
+
           <Grid item xs={3}>
             <Controller
               control={control}
@@ -68,6 +105,7 @@ const BookingInfo = () => {
                 <TextField
                   label="Return Date"
                   type="date"
+                  disabled={oneWayTrip === true ? false : true}
                   variant="outlined"
                   fullWidth={true}
                   {...field}

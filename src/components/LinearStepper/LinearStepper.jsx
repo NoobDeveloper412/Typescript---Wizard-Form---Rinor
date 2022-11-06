@@ -6,18 +6,13 @@ import {
   Step,
   StepLabel,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { FormProvider, useForm } from "react-hook-form";
 import BookingInfo from "./steps/BookingInfoStep";
 import FlightInfo from "./steps/FlightInfoStep";
 import PassengerInfo from "./steps/PassengerInfo";
 import ReviewBooking from "./steps/ReviewBookingStep";
-
-const useStyles = makeStyles((theme) => ({
-  button: {
-    marginRight: theme.spacing(1),
-  },
-}));
+import useStyles from "../../View/styles/FormWizardStyles";
+import { formDefaultValues } from "../utils/constants";
 
 function getSteps() {
   return [
@@ -46,36 +41,7 @@ function getStepContent(step) {
 const LinearStepper = () => {
   const classes = useStyles();
   const methods = useForm({
-    defaultValues: {
-      origin: "",
-      destination: "",
-      journeyDate: "",
-      returnDate: "",
-      number_of_adults: 1,
-      number_of_children: 1,
-      number_of_infants: 1,
-      adults: [],
-      children: [],
-      infants: [],
-      airline: "",
-      cabin: "",
-      basicFare: "",
-      taxes: "",
-      sc: "",
-      discount: "",
-      totalAmount: "",
-      gender: "",
-      firstName: "",
-      surName: "",
-      date_of_birth: "",
-      email: "",
-      phone: "",
-      pnr: "",
-      ticket: "",
-      issueBy: "",
-      ledger: "",
-      code: "",
-    },
+    defaultValues: formDefaultValues
   });
   const [activeStep, setActiveStep] = useState(0);
   const [skippedSteps, setSkippedSteps] = useState([]);
@@ -123,7 +89,14 @@ const LinearStepper = () => {
   // };
   return (
     <div>
-      <Stepper alternativeLabel activeStep={activeStep}>
+      <Typography component="h1" variant="h4" align="center">
+        Flight Reservation Form
+      </Typography>
+      <Stepper
+        alternativeLabel
+        activeStep={activeStep}
+        className={classes.stepper}
+      >
         {steps.map((step, index) => {
           const labelProps = {};
           const stepProps = {};
@@ -149,46 +122,50 @@ const LinearStepper = () => {
         })}
       </Stepper>
 
-      {activeStep === steps.length ? (
-        <Typography variant="h3" align="center">
-          Thank You
-        </Typography>
-      ) : (
-        <>
-          <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(handleNext)}>
-              {getStepContent(activeStep)}
+      <React.Fragment>
+        {activeStep === steps.length ? (
+          <Typography variant="h3" align="center">
+            Thank You
+          </Typography>
+        ) : (
+          <>
+            <FormProvider {...methods}>
+              <form onSubmit={methods.handleSubmit(handleNext)}>
+                {getStepContent(activeStep)}
 
-              <Button
-                className={classes.button}
-                disabled={activeStep === 0}
-                onClick={handleBack}
-              >
-                Back
-              </Button>
-              {isStepOptional(activeStep) && (
-                <Button
-                  className={classes.button}
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSkip}
-                >
-                  Skip
-                </Button>
-              )}
-              <Button
-                className={classes.button}
-                variant="contained"
-                color="primary"
-                // onClick={handleNext}
-                type="submit"
-              >
-                {activeStep === steps.length - 1 ? "Finish" : "Next"}
-              </Button>
-            </form>
-          </FormProvider>
-        </>
-      )}
+                {isStepOptional(activeStep) && (
+                  <Button
+                    className={classes.button}
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSkip}
+                  >
+                    Skip
+                  </Button>
+                )}
+                <div className={classes.wrapper}>
+                  <Button
+                    className={classes.button}
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    className={classes.button}
+                    variant="contained"
+                    color="primary"
+                    // onClick={handleNext}
+                    type="submit"
+                  >
+                    {activeStep === steps.length - 1 ? "Submit" : "Next"}
+                  </Button>
+                </div>
+              </form>
+            </FormProvider>
+          </>
+        )}
+      </React.Fragment>
     </div>
   );
 };

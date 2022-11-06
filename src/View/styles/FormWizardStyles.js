@@ -13,7 +13,8 @@ export default makeStyles((theme) => ({
   },
   wrapper: {
     margin: theme.spacing(1),
-    position: "relative",
+    display:'flex',
+    justifyContent:"space-between"
   },
   buttonProgress: {
     position: "absolute",
