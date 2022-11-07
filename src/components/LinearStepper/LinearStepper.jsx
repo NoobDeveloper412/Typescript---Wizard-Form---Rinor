@@ -7,12 +7,13 @@ import {
   StepLabel,
 } from "@material-ui/core";
 import { FormProvider, useForm } from "react-hook-form";
-import BookingInfo from "./steps/BookingInfoStep";
-import FlightInfo from "./steps/FlightInfoStep";
+import BookingInfo from "./steps/BookingInfo";
+import FlightInfo from "./steps/FlightInfo";
 import PassengerInfo from "./steps/PassengerInfo";
-import ReviewBooking from "./steps/ReviewBookingStep";
+import ReviewBooking from "./steps/ReviewBooking";
 import useStyles from "../../View/styles/FormWizardStyles";
 import { formDefaultValues } from "../utils/constants";
+import ConfirmBooking from "./steps/ConfirmBooking";
 
 function getSteps() {
   return [
@@ -20,6 +21,7 @@ function getSteps() {
     "Flight Information",
     "Passenger Information",
     "Review Your Booking",
+    "Confirm Booking"
   ];
 }
 
@@ -33,6 +35,8 @@ function getStepContent(step) {
       return <PassengerInfo />;
     case 3:
       return <ReviewBooking />;
+    case 4:
+      return <ConfirmBooking />;
     default:
       return "unknown step";
   }

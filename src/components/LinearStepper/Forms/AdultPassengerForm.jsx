@@ -1,9 +1,11 @@
+
 import React from "react";
 import AdultPassengerAccordion from "../../UI_FormComponents/Accordions/AdultPassengerAccordion";
 
 function AdultPassengerForm({ register, number_of_adults }) {
   return (
     <React.Fragment>
+     
       {Array.from({ length: number_of_adults }).map((_, index) => (
         <AdultPassengerAccordion
           key={index}

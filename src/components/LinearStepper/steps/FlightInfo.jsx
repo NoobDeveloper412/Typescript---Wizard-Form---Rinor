@@ -1,16 +1,9 @@
 import { Grid, TextField, Typography } from "@material-ui/core";
 import { Controller, useFormContext } from "react-hook-form";
-import React, { useState } from "react";
+import React from "react";
 
 const FlightInfo = () => {
   const { control } = useFormContext();
-  const number_of_adults = control._formValues.number_of_adults;
-
-  const [totalAdultFare, setTotalAdultFare] = useState(0);
-
-  function handleAdultFareUpdate(adultFare) {
-    console.log(adultFare);
-  }
   return (
     <>
       <React.Fragment>
@@ -64,7 +57,6 @@ const FlightInfo = () => {
             <Controller
               control={control}
               name="adultFare"
-              onChange={(e) => handleAdultFareUpdate(e.target.value)}
               render={({ field }) => (
                 <TextField
                   label="Adult Fare"
@@ -75,10 +67,10 @@ const FlightInfo = () => {
               )}
             />{" "}
           </Grid>
-          <Grid item xs={4}>
+              <Grid item xs={4}>
             <Controller
               control={control}
-              name="Children Fare"
+              name="childFare"
               render={({ field }) => (
                 <TextField
                   label="Children Fare"
@@ -92,7 +84,7 @@ const FlightInfo = () => {
           <Grid item xs={4}>
             <Controller
               control={control}
-              name="Infant Fare"
+              name="infantFare"
               render={({ field }) => (
                 <TextField
                   label="Infant Fare"
@@ -138,21 +130,6 @@ const FlightInfo = () => {
               render={({ field }) => (
                 <TextField
                   label="%Discount"
-                  variant="outlined"
-                  fullWidth={true}
-                  {...field}
-                />
-              )}
-            />
-          </Grid>
-          
-          <Grid item xs={3}>
-            <Controller
-              control={control}
-              name="totalAmount"
-              render={({ field }) => (
-                <TextField
-                  label="Total Amount"
                   variant="outlined"
                   fullWidth={true}
                   {...field}
