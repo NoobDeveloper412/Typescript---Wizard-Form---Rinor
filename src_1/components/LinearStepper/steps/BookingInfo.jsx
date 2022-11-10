@@ -54,13 +54,12 @@ const BookingInfo = () => {
               control={control}
               name="origin"
               render={({ field }) => (
-                // <TextField
-                //   label="From"
-                //   variant="outlined"
-                //   fullWidth={true}
-                //   {...field}
-                // />
-                <InputField name="from" label="From" />
+                <TextField
+                  label="From"
+                  variant="outlined"
+                  fullWidth={true}
+                  {...field}
+                />
               )}
             />
           </Grid>

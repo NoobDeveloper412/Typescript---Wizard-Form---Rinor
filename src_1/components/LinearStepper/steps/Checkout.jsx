@@ -12,7 +12,7 @@ const ConfirmBooking = () => {
   };
 
   return (
-    <React.Fragment>
+    <React.Fragment id='checkoutTicketForm'>
       <Typography variant="h6" gutterBottom>
         Confirm Booking
       </Typography>

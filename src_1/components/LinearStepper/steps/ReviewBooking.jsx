@@ -4,18 +4,10 @@ import React, { useEffect, useState } from "react";
 
 const ReviewBooking = () => {
   const { control } = useFormContext();
-  const adultFields = useFieldArray({
+  const { fields } = useFieldArray({
     control,
     name: "adults",
-  }).fields;
-  const childrenFields = useFieldArray({
-    control,
-    name: "children",
-  }).fields;
-  const infantFields = useFieldArray({
-    control,
-    name: "infants",
-  }).fields;
+  });
 
   const {
     origin,
@@ -29,7 +21,7 @@ const ReviewBooking = () => {
     cabin,
     // basicFare,
     taxes,
-    salesCommission,
+    sc,
     discount,
     // gender,
     // firstName,
@@ -117,7 +109,7 @@ const ReviewBooking = () => {
           <p>{totalAdultFare}</p>
           <p>{totalChildrenFare}</p>
           <p>{totalInfantFare}</p>
-          <p>{salesCommission}</p>
+          <p>{sc}</p>
           <p>{taxes}</p>
           <p>{discount}</p>
         </div>
@@ -131,25 +123,7 @@ const ReviewBooking = () => {
             alignItems: "center",
           }}
         >
-          {adultFields.map((field, index) => (
-            <div className="" key={index}>
-              <p>{field.date_of_birth}</p>
-              <p>{field.firstName}</p>
-              <p>{field.email}</p>
-              <p>{field.phoneNumber}</p>
-              <p>{field.surName}</p>
-            </div>
-          ))}
-          {childrenFields.map((field, index) => (
-            <div className="" key={index}>
-              <p>{field.date_of_birth}</p>
-              <p>{field.firstName}</p>
-              <p>{field.email}</p>
-              <p>{field.phoneNumber}</p>
-              <p>{field.surName}</p>
-            </div>
-          ))}
-          {infantFields.map((field, index) => (
+          {fields.map((field, index) => (
             <div className="" key={index}>
               <p>{field.date_of_birth}</p>
               <p>{field.firstName}</p>
@@ -177,6 +151,7 @@ const ReviewBooking = () => {
           <Controller
             control={control}
             name="grandTotal"
+            defaultValue={totalAmount}
             render={({ field }) => (
               <TextField
                 label="Grand Total"

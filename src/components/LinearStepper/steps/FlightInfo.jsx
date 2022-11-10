@@ -98,7 +98,7 @@ const FlightInfo = () => {
           <Grid item xs={3}>
             <Controller
               control={control}
-              name="sc"
+              name="salesCommission"
               render={({ field }) => (
                 <TextField
                   label="Sale Commission"

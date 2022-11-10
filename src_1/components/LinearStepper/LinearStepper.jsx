@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Typography,
   Button,
@@ -6,12 +6,11 @@ import {
   Step,
   StepLabel,
 } from "@material-ui/core";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import BookingInfo from "./steps/BookingInfo";
 import FlightInfo from "./steps/FlightInfo";
 import PassengerInfo from "./steps/PassengerInfo";
 import ReviewBooking from "./steps/ReviewBooking";
-import { TicketTemplate } from "../../View/TicketTemplate/TicketTemplate.jsx";
 import useStyles from "../../View/styles/FormWizardStyles";
 import { formDefaultValues } from "../utils/constants";
 import ConfirmBooking from "./steps/ConfirmBooking";
@@ -49,6 +48,7 @@ function getStepContent(step) {
 
 const LinearStepper = () => {
   const classes = useStyles();
+
   const methods = useForm({
     defaultValues: formDefaultValues,
   });
@@ -98,13 +98,18 @@ const LinearStepper = () => {
   // };
   return (
     <div>
-      <Typography component="h1" variant="h4" align="center">
+      <Typography
+        component="h1"
+        variant="h4"
+        align="center"
+        className="stepperHeader"
+      >
         Flight Reservation Form
       </Typography>
       <Stepper
         alternativeLabel
         activeStep={activeStep}
-        className={classes.stepper}
+        className={[classes.stepper, "stepperHeader"]}
       >
         {steps.map((step, index) => {
           const labelProps = {};
@@ -133,9 +138,7 @@ const LinearStepper = () => {
 
       <React.Fragment>
         {activeStep === steps.length ? (
-          <Typography variant="h3" align="center">
-            Thank You
-          </Typography>
+          <h1>Thank You</h1>
         ) : (
           <>
             <FormProvider {...methods}>
