@@ -1,7 +1,6 @@
-import {  Grid, TextField, Typography } from "@material-ui/core";
+import { Grid, TextField, Typography } from "@material-ui/core";
 import { Controller, useFormContext } from "react-hook-form";
 import React from "react";
-import InputField from "../../UI_FormComponents/InputField";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -118,7 +117,7 @@ const BookingInfo = () => {
           <Grid item xs={4}>
             <Controller
               control={control}
-              name="number_of_adults"
+              name="numberOfAdults"
               render={({ field }) => (
                 <TextField
                   label="Number of Adults"
@@ -132,7 +131,7 @@ const BookingInfo = () => {
           <Grid item xs={4}>
             <Controller
               control={control}
-              name="number_of_children"
+              name="numberOfChildren"
               render={({ field }) => (
                 <TextField
                   label="Number of Children"
@@ -146,7 +145,7 @@ const BookingInfo = () => {
           <Grid item xs={4}>
             <Controller
               control={control}
-              name="number_of_infants"
+              name="numberOfInfants"
               render={({ field }) => (
                 <TextField
                   label="Number of Infants"
@@ -157,53 +156,23 @@ const BookingInfo = () => {
               )}
             />
           </Grid>
+          <Grid item xs={4}>
+
+            <Controller
+              control={control}
+              name="pnrNumber"
+              render={({ field }) => (
+                <TextField
+                  label="PNR Number"
+                  variant="outlined"
+                  fullWidth={true}
+                  {...field}
+                />
+              )}
+            />
+          </Grid>
         </Grid>
       </React.Fragment>
-      {/* <Controller
-        control={control}
-        name="cardNumber"
-        render={({ field }) => (
-          <TextField
-            id="cardNumber"
-            label="Card Number"
-            variant="outlined"
-            placeholder="Enter Your Card Number"
-            fullWidth
-            margin="normal"
-            {...field}
-          />
-        )}
-      />
-      <Controller
-        control={control}
-        name="cardMonth"
-        render={({ field }) => (
-          <TextField
-            id="cardMonth"
-            label="Card Month"
-            variant="outlined"
-            placeholder="Enter Your Card Month"
-            fullWidth
-            margin="normal"
-            {...field}
-          />
-        )}
-      />
-      <Controller
-        control={control}
-        name="cardYear"
-        render={({ field }) => (
-          <TextField
-            id="cardYear"
-            label="Card Year"
-            variant="outlined"
-            placeholder="Enter Your Card Year"
-            fullWidth
-            margin="normal"
-            {...field}
-          />
-        )}
-      /> */}
     </>
   );
 };

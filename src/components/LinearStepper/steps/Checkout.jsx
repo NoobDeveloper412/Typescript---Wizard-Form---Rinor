@@ -1,14 +1,5 @@
-import React from "react";
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import React, { useEffect, useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { Box, Typography } from "@mui/material";
 import { Button } from "@material-ui/core";
 
 function Checkout() {
@@ -30,9 +21,9 @@ function Checkout() {
     destination,
     journeyDate,
     returnDate,
-    number_of_adults,
-    number_of_children,
-    number_of_infants,
+    numberOfAdults,
+    numberOfChildren,
+    numberOfInfants,
     airline,
     cabin,
     basicFare,
@@ -41,8 +32,8 @@ function Checkout() {
     discount,
     gender,
     firstName,
-    surName,
-    date_of_birth,
+    surname,
+    dateOfBirth,
     email,
     phone,
     pnrNumber,
@@ -52,9 +43,45 @@ function Checkout() {
     adultFare,
     childFare,
     infantFare,
-    grandTotal,
     code,
   } = control._formValues;
+  const [totalAdultFare, setTotalAdultFare] = useState(
+    numberOfAdults * adultFare
+  );
+  const [totalChildrenFare, setTotalChildrenFare] = useState(
+    numberOfChildren * childFare
+  );
+  const [totalInfantFare, setTotalInfantFare] = useState(
+    numberOfInfants * infantFare
+  );
+  const [totalFareAmount, setTotalFareAmount] = useState(
+    totalAdultFare + totalInfantFare + totalChildrenFare
+  );
+  const [discountAmount, setDiscountAmount] = useState(0);
+  const [salesCommissionAmount, setSalesCommissionAmount] = useState(0);
+
+  useEffect(() => {
+    setTotalAdultFare(numberOfAdults * adultFare);
+    setTotalChildrenFare(numberOfChildren * childFare);
+    setTotalInfantFare(numberOfInfants * infantFare);
+    setTotalFareAmount(totalAdultFare + totalInfantFare + totalChildrenFare);
+    setDiscountAmount(totalFareAmount * (discount / 100));
+    setSalesCommissionAmount(totalFareAmount * (salesCommission / 100));
+  }, [
+    adultFare,
+    childFare,
+    control,
+    discount,
+    infantFare,
+    numberOfAdults,
+    numberOfChildren,
+    numberOfInfants,
+    salesCommission,
+    totalAdultFare,
+    totalChildrenFare,
+    totalFareAmount,
+    totalInfantFare,
+  ]);
   function printDiv(divName) {
     var printContents = document.getElementById(divName).innerHTML;
     var originalContents = document.body.innerHTML;
@@ -174,18 +201,16 @@ function Checkout() {
                   <tbody>
                     <tr>
                       <td className="cs-width_3 cs-primary_color ">
-                        {number_of_adults}
+                        {numberOfAdults}
                       </td>
                       <td className="cs-width_3 cs-primary_color ">
-                        {number_of_children}
+                        {numberOfChildren}
                       </td>
                       <td className="cs-width_3 cs-primary_color ">
-                        {number_of_infants}{" "}
+                        {numberOfInfants}{" "}
                       </td>
                       <td className="cs-width_3 cs-primary_color cs-text_right">
-                        {number_of_infants +
-                          number_of_children +
-                          number_of_adults}
+                        {numberOfInfants + numberOfChildren + numberOfAdults}
                       </td>
                     </tr>
                   </tbody>
@@ -231,7 +256,7 @@ function Checkout() {
                           {field.gender}
                         </td>
                         <td className="cs-width_1 cs-primary_color">
-                          {field.date_of_birth}
+                          {field.dateOfBirth}
                         </td>
                         <td className="cs-width_1 cs-primary_color">
                           {field.phoneNumber}
@@ -250,7 +275,7 @@ function Checkout() {
                           {field.gender}
                         </td>
                         <td className="cs-width_1 cs-primary_color">
-                          {field.date_of_birth}
+                          {field.dateOfBirth}
                         </td>
                       </tr>
                     ))}
@@ -266,7 +291,7 @@ function Checkout() {
                           {field.gender}
                         </td>
                         <td className="cs-width_1 cs-primary_color">
-                          {field.date_of_birth}
+                          {field.dateOfBirth}
                         </td>{" "}
                       </tr>
                     ))}
@@ -351,19 +376,38 @@ function Checkout() {
                     Taxes:
                   </td>
                   <td className="cs-width_4 cs-primary_color cs-semi_bold cs-text_right">
+                    Grand Total Amount
+                  </td>
+                  <td className="cs-width_4 cs-primary_color cs-semi_bold cs-text_right">
                     Total Amount
                   </td>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="cs-width_8 cs-primary_color">
-                    {salesCommission}%{" "}
+                  <td className="cs-width_2 cs-primary_color">
+                    {Number(salesCommission)}% : PKR.
+                    {totalFareAmount * (salesCommission / 100)}{" "}
                   </td>
-                  <td className="cs-width_8 cs-primary_color">{discount}% </td>
-                  <td className="cs-width_8 cs-primary_color">{taxes}%</td>
-                  <td className="cs-width_8 cs-primary_color cs-semi_bold cs-text_right">
-                    {grandTotal}
+                  <td className="cs-width_2 cs-primary_color">
+                    {Number(discount)}% : PKR.
+                    {totalFareAmount * (discount / 100)}{" "}
+                  </td>
+                  <td className="cs-width_2 cs-primary_color">
+                    PKR. {Number(taxes)}{" "}
+                  </td>
+                  <td className="cs-width_4 cs-primary_color cs-semi_bold cs-text_right">
+                    PKR.{" "}
+                    {totalFareAmount +
+                      Number(salesCommissionAmount) +
+                      Number(taxes)}
+                  </td>
+                  <td className="cs-width_4 cs-primary_color cs-semi_bold cs-text_right">
+                    PKR.{" "}
+                    {totalFareAmount +
+                      Number(salesCommissionAmount) +
+                      Number(taxes) -
+                      discountAmount}
                   </td>
                 </tr>
               </tbody>

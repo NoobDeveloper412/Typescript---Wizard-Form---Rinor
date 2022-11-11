@@ -67,7 +67,7 @@ const FlightInfo = () => {
               )}
             />{" "}
           </Grid>
-              <Grid item xs={4}>
+          <Grid item xs={4}>
             <Controller
               control={control}
               name="childFare"
@@ -115,7 +115,8 @@ const FlightInfo = () => {
               name="taxes"
               render={({ field }) => (
                 <TextField
-                  label="%Taxes"
+                  label="Taxes"
+                  onChange={(e) => field.onChange(parseInt(e.target.value))}
                   variant="outlined"
                   fullWidth={true}
                   {...field}

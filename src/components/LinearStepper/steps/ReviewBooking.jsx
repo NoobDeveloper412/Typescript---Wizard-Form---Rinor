@@ -3,7 +3,8 @@ import { Controller, useFieldArray, useFormContext } from "react-hook-form";
 import React, { useEffect, useState } from "react";
 
 const ReviewBooking = () => {
-  const { control } = useFormContext();
+  const { control, register } = useFormContext();
+  const [grandTotal, setgrandTotal] = useState(0);
   const adultFields = useFieldArray({
     control,
     name: "adults",
@@ -22,9 +23,9 @@ const ReviewBooking = () => {
     destination,
     journeyDate,
     returnDate,
-    number_of_adults,
-    number_of_children,
-    number_of_infants,
+    numberOfAdults,
+    numberOfChildren,
+    numberOfInfants,
     airline,
     cabin,
     // basicFare,
@@ -34,7 +35,7 @@ const ReviewBooking = () => {
     // gender,
     // firstName,
     // surName,
-    // date_of_birth,
+    dateOfBirth,
     // email,
     // phone,
     // pnr,
@@ -44,37 +45,38 @@ const ReviewBooking = () => {
     adultFare,
     childFare,
     infantFare,
-    // grandTotal,
     code,
   } = control._formValues;
 
   const [totalAdultFare, setTotalAdultFare] = useState(
-    number_of_adults * adultFare
+    numberOfAdults * adultFare
   );
   const [totalChildrenFare, setTotalChildrenFare] = useState(
-    number_of_children * childFare
+    numberOfChildren * childFare
   );
   const [totalInfantFare, setTotalInfantFare] = useState(
-    number_of_infants * infantFare
+    numberOfInfants * infantFare
   );
   const [totalAmount, setTotalAmount] = useState(
     totalAdultFare + totalInfantFare + totalChildrenFare
   );
 
   useEffect(() => {
-    setTotalAdultFare(number_of_adults * adultFare);
-    setTotalChildrenFare(number_of_children * childFare);
-    setTotalInfantFare(number_of_infants * infantFare);
+    setTotalAdultFare(numberOfAdults * adultFare);
+    setTotalChildrenFare(numberOfChildren * childFare);
+    setTotalInfantFare(numberOfInfants * infantFare);
     setTotalAmount(totalAdultFare + totalInfantFare + totalChildrenFare);
+    setgrandTotal(totalAmount);
   }, [
     adultFare,
     childFare,
     control,
     infantFare,
-    number_of_adults,
-    number_of_children,
-    number_of_infants,
+    numberOfAdults,
+    numberOfChildren,
+    numberOfInfants,
     totalAdultFare,
+    totalAmount,
     totalChildrenFare,
     totalInfantFare,
   ]);
@@ -96,9 +98,9 @@ const ReviewBooking = () => {
           <p>{destination}</p>
           <p>{journeyDate}</p>
           <p>{returnDate}</p>
-          <p>{number_of_adults}</p>
-          <p>{number_of_children}</p>
-          <p>{number_of_infants}</p>
+          <p>{numberOfAdults}</p>
+          <p>{numberOfChildren}</p>
+          <p>{numberOfInfants}</p>
         </div>
 
         <Typography variant="h6" align="center" gutterBottom>
@@ -132,30 +134,29 @@ const ReviewBooking = () => {
           }}
         >
           {adultFields.map((field, index) => (
-            <div className="" key={index}>
-              <p>{field.date_of_birth}</p>
-              <p>{field.firstName}</p>
-              <p>{field.email}</p>
-              <p>{field.phoneNumber}</p>
-              <p>{field.surName}</p>
+            <div key={index}>
+              <p>Date of Birth:{field.dateOfBirth}</p>
+              <p>First name: {field.firstName}</p>
+              <p>Email: {field.email}</p>
+              <p>Phone Number{field.phoneNumber}</p>
+              <p>Surname{field.surname}</p>
             </div>
           ))}
           {childrenFields.map((field, index) => (
-            <div className="" key={index}>
-              <p>{field.date_of_birth}</p>
-              <p>{field.firstName}</p>
-              <p>{field.email}</p>
-              <p>{field.phoneNumber}</p>
-              <p>{field.surName}</p>
+            <div key={index.id}>
+              <p>Date of Birth: {field.dateOfBirth}</p>
+              <p>First name: {field.firstName}</p>
+              <p>Email {field.email}</p>
+              <p>Surname: {field.surname}</p>
             </div>
           ))}
           {infantFields.map((field, index) => (
-            <div className="" key={index}>
-              <p>{field.date_of_birth}</p>
+            <div key={index}>
+              <p>{field.dateOfBirth}</p>
               <p>{field.firstName}</p>
               <p>{field.email}</p>
               <p>{field.phoneNumber}</p>
-              <p>{field.surName}</p>
+              <p>{field.surname}</p>
             </div>
           ))}
         </div>
@@ -171,36 +172,7 @@ const ReviewBooking = () => {
         <p>
           Total Infant Fare: {isNaN(totalInfantFare) ? "" : totalInfantFare}
         </p>
-        <p>Grand Total:{isNaN(totalAmount) ? "" : totalAmount}</p>
-
-        <Grid>
-          <Controller
-            control={control}
-            name="grandTotal"
-            render={({ field }) => (
-              <TextField
-                label="Grand Total"
-                variant="outlined"
-                fullWidth={true}
-                {...field}
-              />
-            )}
-          />
-        </Grid>
-        <Grid>
-          <Controller
-            control={control}
-            name="pnrNumber"
-            render={({ field }) => (
-              <TextField
-                label="PNR Number"
-                variant="outlined"
-                fullWidth={true}
-                {...field}
-              />
-            )}
-          />
-        </Grid>
+        <p>Grand Total: {isNaN(grandTotal) ? "" : grandTotal}</p>
       </React.Fragment>
     </>
   );

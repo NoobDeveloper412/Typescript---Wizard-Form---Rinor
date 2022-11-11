@@ -52,7 +52,7 @@ const LinearStepper = () => {
   const methods = useForm({
     defaultValues: formDefaultValues,
   });
-  const [activeStep, setActiveStep] = useState(5);
+  const [activeStep, setActiveStep] = useState(1);
   const [skippedSteps, setSkippedSteps] = useState([]);
   const steps = getSteps();
 

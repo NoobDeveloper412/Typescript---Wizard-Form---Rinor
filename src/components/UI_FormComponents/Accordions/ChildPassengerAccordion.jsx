@@ -9,7 +9,7 @@ import { Container, TextField } from "@material-ui/core";
 function ChildPassengerDetailAccordion({ title, subtitle, register, index }) {
   return (
     <div>
-      <Accordion style={{ backgroundColor:'#424242', margin:'10px 0px' }}>
+      <Accordion style={{ backgroundColor: "#424242", margin: "10px 0px" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -21,7 +21,7 @@ function ChildPassengerDetailAccordion({ title, subtitle, register, index }) {
           <Typography color="darkgrey">{subtitle}</Typography>
           <Container style={{ marginTop: "20px", paddingLeft: "0px" }}>
             <TextField
-              {...register(`children.${index}.surName`)}
+              {...register(`children.${index}.surname`)}
               label="Surname"
               variant="outlined"
               margin="dense"
@@ -61,12 +61,22 @@ function ChildPassengerDetailAccordion({ title, subtitle, register, index }) {
               }}
             />
             <TextField
-              {...register(`children.${index}.date_of_birth_of_children`)}
+              {...register(`children.${index}.dateOfBirth`)}
               label="Date of Birth"
               variant="outlined"
               margin="dense"
               fullWidth={true}
               type="date"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              {...register(`children.${index}.ticketNumber`)}
+              label="Ticket Number"
+              variant="outlined"
+              margin="dense"
+              fullWidth={true}
               InputLabelProps={{
                 shrink: true,
               }}

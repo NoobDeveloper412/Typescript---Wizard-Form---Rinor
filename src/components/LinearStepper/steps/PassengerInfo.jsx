@@ -1,4 +1,4 @@
-import {  Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { useFormContext } from "react-hook-form";
 import React from "react";
 import AdultPassengerForm from "../Forms/AdultPassengerForm";
@@ -7,7 +7,7 @@ import InfantPassengerForm from "../Forms/InfantPassengerForm";
 
 const PassengerInfo = () => {
   const { control, register } = useFormContext();
-  const { number_of_adults, number_of_children, number_of_infants } =
+  const { numberOfAdults, numberOfChildren, numberOfInfants } =
     control._formValues;
 
   return (
@@ -16,19 +16,15 @@ const PassengerInfo = () => {
         Passenger Information
       </Typography>
 
-      <AdultPassengerForm
-        register={register}
-        number_of_adults={number_of_adults}
-      />
+      <AdultPassengerForm register={register} numberOfAdults={numberOfAdults} />
       <ChildPassengerForm
         register={register}
-        number_of_children={number_of_children}
+        numberOfChildren={numberOfChildren}
       />
       <InfantPassengerForm
         register={register}
-        number_of_infants={number_of_infants}
+        numberOfInfants={numberOfInfants}
       />
-
     </React.Fragment>
   );
 };

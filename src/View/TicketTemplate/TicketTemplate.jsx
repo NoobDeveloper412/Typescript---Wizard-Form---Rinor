@@ -113,13 +113,13 @@ export const TicketTemplate = () => {
                   <tbody>
                     <tr>
                       <td className="cs-width_3">
-                        {"{"}number_of_adults{"}"}
+                        {"{"}Number{"}"}
                       </td>
                       <td className="cs-width_3">
                         {"{"}number_of_children{"}"}
                       </td>
                       <td className="cs-width_3">
-                        {"{"}number_of_infants{"}"}
+                        {"{"}numberOfInfants{"}"}
                       </td>
                       <td className="cs-width_3 cs-text_right">
                         {"{"}number_of_travelers{"}"}
@@ -220,7 +220,7 @@ export const TicketTemplate = () => {
                 </tr>
                 <tr>
                   <td className="cs-width_2">
-                    {"{"}number_of_infants * infants{"}"}
+                    {"{"}numberOfInfants * infants{"}"}
                   </td>
                   <td className="cs-width_2">
                     {"{"}infantFare{"}"}

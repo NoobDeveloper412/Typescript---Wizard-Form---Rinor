@@ -1,10 +1,10 @@
 import React from "react";
 import ChildPassengerDetailAccordion from "../../UI_FormComponents/Accordions/ChildPassengerAccordion";
 
-function ChildPassengerForm({ register, number_of_children }) {
+function ChildPassengerForm({ register, numberOfChildren }) {
   return (
     <React.Fragment>
-      {Array.from({ length: number_of_children }).map((_, index) => (
+      {Array.from({ length: numberOfChildren }).map((_, index) => (
         <ChildPassengerDetailAccordion
           key={index}
           title={`Child ${index + 1}`}

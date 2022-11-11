@@ -5,10 +5,11 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Container, TextField } from "@material-ui/core";
+
 function InfantPassengerDetailAccordion({ title, subtitle, register, index }) {
   return (
     <div>
-      <Accordion style={{ backgroundColor: '#424242', margin: "10px 0px" }}>
+      <Accordion style={{ backgroundColor: "#424242", margin: "10px 0px" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -20,7 +21,7 @@ function InfantPassengerDetailAccordion({ title, subtitle, register, index }) {
           <Typography color="darkgrey">{subtitle}</Typography>
           <Container style={{ marginTop: "20px", paddingLeft: "0px" }}>
             <TextField
-              {...register(`infants.${index}.surName`)}
+              {...register(`infants.${index}.surname`)}
               label="Surname"
               variant="outlined"
               margin="dense"
@@ -40,12 +41,22 @@ function InfantPassengerDetailAccordion({ title, subtitle, register, index }) {
               }}
             />
             <TextField
-              {...register(`infants.${index}.date_of_birth_of_infant`)}
+              {...register(`infants.${index}.dateOfBirth`)}
               label="Date of Birth"
               variant="outlined"
               margin="dense"
               fullWidth={true}
               type="date"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              {...register(`infants.${index}.ticketNumber`)}
+              label="Ticket Number"
+              variant="outlined"
+              margin="dense"
+              fullWidth={true}
               InputLabelProps={{
                 shrink: true,
               }}
